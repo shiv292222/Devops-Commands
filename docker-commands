@@ -1,0 +1,54 @@
+docker --version
+
+This command checks the installed version of Docker. Useful for confirming that Docker is properly installed and verifying the version.
+docker pull ubuntu
+
+Pulls the latest ubuntu image from Docker Hub (the official Docker registry) to your local machine. If you don't specify a version, it fetches the latest.
+docker run ubuntu:latest
+
+Runs a container from the ubuntu:latest image interactively. Since no options were passed, it will run the default command for the ubuntu image (which usually exits immediately since there’s no ongoing process).
+docker ps
+
+Shows a list of currently running containers. It only displays containers that are actively running, not the ones that have stopped.
+docker run -d ubuntu:latest
+
+Runs a ubuntu:latest container in detached mode (-d flag). Detached mode runs the container in the background, and the container's output is not shown on the terminal.
+docker run -dit ubuntu:latest
+
+Runs a ubuntu:latest container in both detached mode (-d) and interactive mode (-i), with a pseudo-terminal (-t). This allows you to attach to the container and interact with it in the background.
+docker ps -a
+
+Shows all containers, including the ones that have stopped. This is useful for seeing the status of every container, not just the active ones.
+docker run hello-world
+
+Runs the hello-world container, which prints a message to verify that Docker is installed and working correctly. It’s a basic test container.
+docker pull mysql:latest
+
+Pulls the latest MySQL image from Docker Hub.
+docker images
+
+Lists all the images downloaded on your system. It shows the repository name, tag, image ID, and the size of each image.
+docker run -d mysql:latest
+
+Starts a mysql:latest container in detached mode, but since it doesn’t have any environment variables set (like root password), it may not run properly.
+docker run -dit mysql:latest
+
+Starts a MySQL container in detached mode (-d), interactive (-i), with a terminal (-t). However, without setting the environment variables (e.g., MYSQL_ROOT_PASSWORD), it likely won’t function fully.
+docker run mysql:latest
+
+Starts a MySQL container interactively, but again, without setting necessary configurations like MYSQL_ROOT_PASSWORD, the container will likely fail or exit.
+docker run -d -e MYSQL_ROOT_PASSWORD=test@123 mysql:latest
+
+Starts a MySQL container in detached mode, while also setting an environment variable MYSQL_ROOT_PASSWORD to test@123. This is essential for running the MySQL container properly, as it needs a root password.
+docker exec -it ccd88edb13bb bash
+
+Executes a command (bash in this case) inside a running container (ccd88edb13bb is the container ID). The -i flag makes the session interactive, and -t allocates a pseudo-terminal. This lets you access the container's shell.
+ngnix --version
+
+This appears to be a typo (nginx is misspelled). It’s meant to show the version of Nginx installed, but this will not work unless Nginx is installed in the container or locally on your system.
+docker run -d -p 80:80 ngnix:latest
+
+Runs an Nginx container in detached mode and maps the host’s port 80 to the container’s port 80. The spelling error in ngnix would cause this to fail unless you actually have a custom image named ngnix.
+docker run -d -p 80:80 nginx:latest
+
+Runs an Nginx container in detached mode and correctly maps the host port 80 to container port 80. This will serve the Nginx default web page.
