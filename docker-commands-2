@@ -1,0 +1,62 @@
+# Downloads the latest Ubuntu image from Docker Hub to your local machine
+docker pull ubuntu:latest
+
+# Lists all Docker images that are available locally on your machine
+docker images
+
+# Runs a container from the ubuntu:latest image in detached mode (-d), interactive (-i), with a TTY allocated (-t)
+docker run -dit ubuntu:latest
+
+# Builds a Docker image with the tag "flask-app" from the Dockerfile located in the current directory (.)
+docker build -t flask-app .
+
+# Starts a MySQL 5.7 container named "mysql2" in detached mode with environment variables for setup, volume, and port mapping
+docker run -d --name mysql2 -e MYSQL_DATABASE=mydb -e MYSQL_ROOT_PASSWORD=admin -v volume-2:/var/lib/mysql -p 3306:3306 mysql:5.7
+
+# Stops a running container based on its container ID
+docker kill <container-id>
+
+# Removes a stopped container by specifying its container ID
+docker rm <container-id>
+
+# Runs the "flask-app:latest" container with environment variables configured for MySQL database connection and port mapping
+docker run -d -e MYSQL_HOST=mysql2 -e MYSQL_USER=root -e MYSQL_PASSWORD=admin -e MYSQL_DB=mydb -p 5000:5000 flask-app:latest
+
+# Lists all running Docker containers, showing container ID, name, and status
+docker ps
+
+# Lists all containers, including those that have exited
+docker ps -a
+
+# Displays a list of all Docker networks on your machine
+docker network ls
+
+# Provides detailed information about a specific container or image by container ID or name
+docker inspect <container-id or name>
+
+# Creates a new Docker network named "twotier" for inter-container communication
+docker network create twotier
+
+# Runs the MySQL container on the "twotier" network to communicate with other containers on the same network
+docker run -d --name mysql2 -e MYSQL_DATABASE=mydb -e MYSQL_ROOT_PASSWORD=admin -v volume-2:/var/lib/mysql --network=twotier mysql:5.7
+
+# Shows detailed information about the "twotier" network, including connected containers and configuration
+docker network inspect twotier
+
+# Validates the syntax of your docker-compose.yml file and displays the configuration if valid
+docker compose config
+
+# Starts the services defined in the docker-compose.yml file in the foreground
+docker compose up
+
+# Starts the services defined in the docker-compose.yml file in detached mode, allowing terminal usage after launching
+docker compose up -d
+
+# Stops and removes all containers, networks, and volumes created by "docker-compose up"
+docker compose down
+
+# Displays the installed Docker version
+docker --version
+
+# Lists all running Docker containers
+docker ps
