@@ -1,0 +1,68 @@
+# To create a Kubernetes cluster with Kind
+kind create cluster --name=mycluster
+
+# To delete a Kind cluster
+kind delete cluster --name=mycluster
+
+# To list all clusters created by Kind
+kind get clusters
+
+# To get namespaces in the Kubernetes cluster
+kubectl get namespaces
+
+# To create a namespace using a YAML file
+kubectl apply -f namespace.yml
+
+# To list namespaces in the Kubernetes cluster
+kubectl get ns
+
+# To deploy a Pod from a YAML manifest
+kubectl apply -f pod.yml
+
+# To list all Pods
+kubectl get pods
+
+# To list Pods in a specific namespace
+kubectl get pods -n nginx
+
+# To describe a specific Pod
+kubectl describe pod nginx-pod -n nginx
+
+# To describe a Pod without making actual changes
+kubectl describe pod nginx-pod -n nginx --dry-run=client
+
+# To delete a Pod by name
+kubectl delete pod pod-nginx -n nginx
+
+# To delete Pods using a YAML manifest
+kubectl delete -f pod.yml -n nginx
+
+# To deploy a Deployment using a YAML file
+kubectl apply -f deployment.yml -n nginx
+
+# To list all Deployments in a namespace
+kubectl get deployments -n nginx
+
+# To scale a Deployment to 5 replicas
+kubectl scale deployment nginx-deployment -n nginx --replicas=5
+
+# To update the image for a Deployment
+kubectl set image deployment/nginx-deployment nginx-container=nginx:1.14.2 -n nginx
+
+# To view the rollout status of a Deployment
+kubectl rollout status deployment/nginx-deployment -n nginx
+
+# To view the rollout history of a Deployment
+kubectl rollout history deployment/nginx-deployment -n nginx
+
+# To undo the last rollout of a Deployment
+kubectl rollout undo deployment nginx-deployment -n nginx
+
+# To forward a local port to a service
+kubectl port-forward service/nginx-service -n nginx 8080:80 --address=0.0.0.0
+
+# To expose a Deployment as a service using a YAML file
+kubectl apply -f service.yml
+
+# To get details of services in a namespace
+kubectl get service -n nginx
